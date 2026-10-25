@@ -3,19 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e-Nota Digital Signature - Gemah Rifah</title>
-    <!-- Libraries -->
+    <title>e-Nota Digital Signature - Yudi Filter</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
         
-        /* Step Transition */
         .step-content { display: none; }
         .step-content.active { display: block; }
 
-        /* Mobile Paper Logic */
         .paper-container {
             width: 100%;
             overflow-x: auto;
@@ -32,7 +29,6 @@
             transform-origin: top center;
         }
 
-        /* Signature Pad */
         .sig-canvas {
             touch-action: none;
             background-color: #f8fafc;
@@ -43,15 +39,21 @@
 
         @media print {
             .no-print { display: none !important; }
-            body { background: white; margin: 0; padding: 0; }
-            #print-area { 
-                box-shadow: none !important; 
-                border: none !important; 
-                width: 100% !important; 
+            body { background: white !important; margin: 0 !important; padding: 0 !important; }
+            #print-area {
+                box-shadow: none !important;
+                border: none !important;
+                width: 100% !important;
+                min-width: 0 !important;
+                min-height: 0 !important;
                 padding: 10mm !important;
                 margin: 0 !important;
-                transform: scale(1) !important;
-                min-height: auto;
+                transform: none !important;
+            }
+            /* Pastikan border tabel tercetak */
+            #print-area, #print-area * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
         }
     </style>
@@ -63,7 +65,6 @@
         <div class="max-w-4xl mx-auto px-4 py-3">
             <div class="flex items-center justify-between relative">
                 <div class="absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -translate-y-1/2 z-0"></div>
-                <!-- 5 Steps Now -->
                 <div class="step-dot active z-10 flex flex-col items-center gap-1" data-step="1">
                     <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold ring-4 ring-white">1</div>
                     <span class="text-[8px] font-bold text-blue-600 uppercase">Toko</span>
@@ -90,15 +91,15 @@
 
     <main class="max-w-4xl mx-auto p-4 lg:p-8">
         
-        <!-- STEP 1: TOKO -->
+        <!-- STEP 1: TOKO (DATA SUDAH DISAMAKAN) -->
         <section id="step-1" class="step-content active space-y-6">
             <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                 <h2 class="text-xl font-black mb-6">🏢 Identitas Toko</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" id="in-company" value="GEMAH RIFAH FILTER" class="w-full border p-4 rounded-2xl text-sm outline-none" placeholder="Nama Bisnis">
-                    <input type="text" id="in-subtitle" value="Pusat Perakitan Depo Air Isi Ulang" class="w-full border p-4 rounded-2xl text-sm outline-none" placeholder="Slogan">
-                    <textarea id="in-address" class="w-full border p-4 rounded-2xl text-sm outline-none md:col-span-2" rows="2">Jl. Raya Pati-kayen Km 12 Ds Sundoluhur Kec Kayen, Pati.</textarea>
-                    <input type="text" id="in-phone" value="08988147186" class="w-full border p-4 rounded-2xl text-sm outline-none" placeholder="WhatsApp">
+                    <input type="text" id="in-company" value="Yudi Filter" class="w-full border p-4 rounded-2xl text-sm outline-none" placeholder="Nama Bisnis">
+                    <input type="text" id="in-subtitle" value="Water Treatment Solution" class="w-full border p-4 rounded-2xl text-sm outline-none" placeholder="Slogan">
+                    <textarea id="in-address" class="w-full border p-4 rounded-2xl text-sm outline-none md:col-span-2" rows="2">Toko Fibertech Global · Jl. Raya Pati-Kayen Km 12 Ds Sundoluhur Kec Kayen, Pati.</textarea>
+                    <input type="text" id="in-phone" value="0898 8147 186" class="w-full border p-4 rounded-2xl text-sm outline-none" placeholder="WhatsApp">
                 </div>
             </div>
         </section>
@@ -110,9 +111,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="text" id="in-customer" value="Muh Iqbal Faisal" class="w-full border p-4 rounded-2xl text-sm font-bold outline-none" placeholder="Nama Pelanggan">
                     <input type="text" id="in-cust-phone" value="6285292624392" class="w-full border p-4 rounded-2xl text-sm outline-none" placeholder="No. HP">
-                    <input type="text" id="in-cust-addr" value="Dapur MBG suwawal" class="w-full border p-4 rounded-2xl text-sm outline-none md:col-span-2" placeholder="Alamat">
+                    <input type="text" id="in-cust-addr" value="Dapur MBG Suwawal" class="w-full border p-4 rounded-2xl text-sm outline-none md:col-span-2" placeholder="Alamat">
                     <input type="text" id="in-sales" value="Yudi Filter" class="w-full border p-4 rounded-2xl text-sm outline-none" placeholder="Salesman">
-                    <input type="text" id="in-due" value="+24044-08-02 (8042026 hari)" class="w-full border p-4 rounded-2xl text-sm outline-none" placeholder="Jatuh Tempo">
+                    <input type="text" id="in-due" value="Sesuai Kesepakatan" class="w-full border p-4 rounded-2xl text-sm outline-none" placeholder="Jatuh Tempo">
                 </div>
             </div>
         </section>
@@ -131,15 +132,14 @@
                 </div>
                 <div class="mt-6">
                     <label class="text-[10px] font-bold text-slate-400 uppercase">Catatan Tambahan</label>
-                    <textarea id="in-footer-note" class="w-full border p-4 rounded-2xl text-sm outline-none" rows="2" placeholder="Contoh: Barang sudah diterima..."></textarea>
+                    <textarea id="in-footer-note" class="w-full border p-4 rounded-2xl text-sm outline-none" rows="2" placeholder="Contoh: Barang sudah diterima dalam kondisi baik."></textarea>
                 </div>
             </div>
         </section>
 
-        <!-- STEP 4: TANDA TANGAN (NEW) -->
+        <!-- STEP 4: TANDA TANGAN -->
         <section id="step-4" class="step-content space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Signature 1: Tanda Terima -->
                 <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="font-black text-lg">🖋️ Tanda Terima</h3>
@@ -148,8 +148,6 @@
                     <canvas id="canvas-penerima" class="sig-canvas w-full h-48"></canvas>
                     <p class="text-[10px] text-slate-400 mt-2 italic text-center">(Silakan tanda tangan di dalam kotak)</p>
                 </div>
-
-                <!-- Signature 2: Hormat Kami -->
                 <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="font-black text-lg">🖋️ Hormat Kami</h3>
@@ -167,10 +165,11 @@
                 <div id="print-area" class="p-12 flex flex-col">
                     <!-- Header Nota -->
                     <div class="flex justify-between items-start mb-6 text-black">
+                        <!-- ✅ SESUDAH -->
                         <div class="flex gap-6">
-                            <div class="w-24 h-24 bg-slate-50 border border-slate-100 flex items-center justify-center">
-                                <svg viewBox="0 0 100 100" class="w-14 h-14"><path d="M50,10 Q35,40 35,65 A15,15 0 1,0 65,65 Q65,40 50,10 Z" fill="#2563eb" /></svg>
-                            </div>
+                            <img src="logofy.png" 
+                                 alt="Logo Yudi Filter" 
+                                 class="w-24 h-24 object-contain flex-shrink-0">
                             <div>
                                 <h1 id="out-company" class="text-2xl font-black uppercase"></h1>
                                 <p id="out-subtitle" class="text-lg font-semibold opacity-70"></p>
@@ -198,7 +197,6 @@
                         <tbody id="table-body" class="text-[13px]"></tbody>
                     </table>
 
-                    <!-- Disclaimer & Footer Note -->
                     <div class="mt-8 p-3 border border-black/10 rounded bg-slate-50/50 text-[10px] text-black">
                         <p class="font-bold uppercase tracking-tighter">⚠️ PERHATIAN:</p>
                         <ul class="mt-1 list-disc pl-4 opacity-70 space-y-0.5">
@@ -208,7 +206,6 @@
                         </ul>
                     </div>
 
-                    <!-- Summary -->
                     <div class="mt-6 pt-2 border-t-2 border-black text-black">
                         <div class="flex justify-between items-start">
                             <div id="out-qty-total" class="text-xs font-bold opacity-60"></div>
@@ -221,7 +218,6 @@
                         </div>
                     </div>
 
-                    <!-- Tanda Tangan Rendering -->
                     <div class="flex justify-between items-end mt-16 text-black">
                         <div class="text-center w-48">
                             <p class="text-xs font-bold mb-2">Tanda Terima</p>
@@ -240,13 +236,11 @@
                 </div>
             </div>
 
-            <!-- Print/Download -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pb-12">
                 <button onclick="window.print()" class="bg-slate-900 text-white py-5 rounded-2xl font-black shadow-xl hover:bg-black transition">🖨️ PRINT PDF</button>
                 <button onclick="downloadImage()" class="bg-blue-600 text-white py-5 rounded-2xl font-black shadow-xl hover:bg-blue-700 transition">🖼️ DOWNLOAD JPG</button>
             </div>
         </section>
-
     </main>
 
     <!-- Nav Bottom -->
@@ -259,61 +253,89 @@
 
     <script>
         let currentStep = 1;
-        let items = [{ id: 1, qty: "1 Unit", name: "Filter Paket C-2000", price: 28500000, note: "Pemasangan Kayen" }];
+        // Default item disesuaikan dengan produk landing page (Paket C)
+        let items = [{ 
+            id: 1, 
+            qty: "1 Unit", 
+            name: "Paket C - IPAL MBG + Ekstra FRP", 
+            price: 21500000, 
+            note: "Sesuai penawaran Yudi Filter" 
+        }];
         const canvases = {};
         const ctxs = {};
 
-        // Inisialisasi Signature Pad
+        /* ============================================================
+           SIGNATURE PAD — FIX: DPI-aware, init-once, no duplicate listener
+           ============================================================ */
         function initSignaturePad(id) {
             const canvas = document.getElementById(id);
-            const parent = canvas.parentElement;
-            canvas.width = parent.offsetWidth;
-            canvas.height = parent.offsetHeight - 40; // Kurangi padding h3
-            
+            if (!canvas || canvas.dataset.initialized === 'true') return;
+
+            const rect = canvas.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+
             const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
             ctx.lineWidth = 2.5;
             ctx.lineCap = 'round';
-            ctx.strokeStyle = '#0f172a'; // Slate 900
-            
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = '#0f172a';
+
             canvases[id] = canvas;
             ctxs[id] = ctx;
+            canvas.dataset.initialized = 'true';
 
             let drawing = false;
+            const getPos = (e) => {
+                const r = canvas.getBoundingClientRect();
+                const cx = e.clientX ?? e.touches[0].clientX;
+                const cy = e.clientY ?? e.touches[0].clientY;
+                return { x: cx - r.left, y: cy - r.top };
+            };
 
-            const startPos = (e) => { 
-                drawing = true; 
-                draw(e); 
-            };
-            const endPos = () => { 
-                drawing = false; 
-                ctx.beginPath(); 
-            };
+            const start = (e) => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); };
+            const end = () => { drawing = false; ctx.beginPath(); };
             const draw = (e) => {
                 if (!drawing) return;
-                const rect = canvas.getBoundingClientRect();
-                const x = (e.clientX || e.touches[0].clientX) - rect.left;
-                const y = (e.clientY || e.touches[0].clientY) - rect.top;
-                
-                ctx.lineTo(x, y);
+                const p = getPos(e);
+                ctx.lineTo(p.x, p.y);
                 ctx.stroke();
                 ctx.beginPath();
-                ctx.moveTo(x, y);
+                ctx.moveTo(p.x, p.y);
             };
 
-            canvas.addEventListener('mousedown', startPos);
-            canvas.addEventListener('mouseup', endPos);
+            canvas.addEventListener('mousedown', start);
+            canvas.addEventListener('mouseup', end);
             canvas.addEventListener('mousemove', draw);
-            canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startPos(e); });
-            canvas.addEventListener('touchend', (e) => { e.preventDefault(); endPos(); });
-            canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); });
+            canvas.addEventListener('mouseleave', end);
+            canvas.addEventListener('touchstart', (e) => { e.preventDefault(); start(e); }, { passive: false });
+            canvas.addEventListener('touchend', (e) => { e.preventDefault(); end(); }, { passive: false });
+            canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); }, { passive: false });
         }
 
         function clearSig(id) {
             const ctx = ctxs[id];
             const canvas = canvases[id];
+            if (!ctx || !canvas) return;
+            // Over-clear in scaled space = effectively clears entire canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
+        function isCanvasBlank(canvas) {
+            if (!canvas) return true;
+            const ctx = canvas.getContext('2d');
+            const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            for (let i = 3; i < data.length; i += 4) {
+                if (data[i] !== 0) return false;
+            }
+            return true;
+        }
+
+        /* ============================================================
+           STEP NAVIGATION
+           ============================================================ */
         function changeStep(n) {
             const nextStep = currentStep + n;
             if (nextStep < 1 || nextStep > 5) return;
@@ -321,7 +343,6 @@
             document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
             document.getElementById(`step-${nextStep}`).classList.add('active');
 
-            // Update Dot
             document.querySelectorAll('.step-dot').forEach((dot, idx) => {
                 const s = idx + 1;
                 const circle = dot.querySelector('div');
@@ -329,6 +350,7 @@
                 if (s < nextStep) {
                     circle.className = "w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] font-bold ring-4 ring-white";
                     circle.innerText = "✓";
+                    label.classList.remove('text-blue-600');
                 } else if (s === nextStep) {
                     circle.className = "w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold ring-4 ring-white";
                     circle.innerText = s;
@@ -336,15 +358,17 @@
                 } else {
                     circle.className = "w-7 h-7 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-[10px] font-bold ring-4 ring-white";
                     circle.innerText = s;
+                    label.classList.remove('text-blue-600');
                 }
             });
 
             currentStep = nextStep;
             document.getElementById('prevBtn').classList.toggle('hidden', currentStep === 1);
-            document.getElementById('nextBtn').innerText = currentStep === 5 ? "Selesai" : (currentStep === 4 ? "Lanjut Preview" : "Lanjutkan");
-            
+            document.getElementById('nextBtn').innerText = currentStep === 4 ? "Lanjut Preview" : "Lanjutkan";
+            document.getElementById('nextBtn').classList.toggle('hidden', currentStep === 5);
+
             if (currentStep === 4) {
-                // Beri sedikit delay agar DOM canvas ter-render sebelum di-init
+                // Init once, delay agar canvas sudah ter-render
                 setTimeout(() => {
                     initSignaturePad('canvas-penerima');
                     initSignaturePad('canvas-hormat');
@@ -354,37 +378,55 @@
             if (currentStep === 5) {
                 syncPreview();
                 handleMobileScaling();
-                document.getElementById('nextBtn').classList.add('hidden');
-            } else {
-                document.getElementById('nextBtn').classList.remove('hidden');
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        /* ============================================================
+           SYNC PREVIEW
+           ============================================================ */
         function syncPreview() {
-            // Text Sync
-            ['company', 'subtitle', 'address', 'phone', 'customer', 'cust-addr', 'cust-phone', 'due', 'sales', 'footer-note'].forEach(f => {
+            // Text fields
+            ['company', 'subtitle', 'address', 'phone', 'customer', 'cust-addr', 'cust-phone'].forEach(f => {
                 const val = document.getElementById(`in-${f}`).value;
-                const out = document.getElementById(`out-${f}`);
-                out.innerText = (f === 'due' ? 'Jatuh Tempo ' : (f === 'sales' ? 'Salesman ' : '')) + val;
+                document.getElementById(`out-${f}`).innerText = val;
             });
 
-            // Date
-            const now = new Date();
-            document.getElementById('out-date').innerText = `${now.getDate()} April ${now.getFullYear()}`;
+            // Prefixed fields
+            document.getElementById('out-due').innerText = 'Jatuh Tempo: ' + document.getElementById('in-due').value;
+            document.getElementById('out-sales').innerText = 'Salesman: ' + document.getElementById('in-sales').value;
 
-            // Signature Sync
+            // Footer note — sembunyikan jika kosong
+            const footerNote = document.getElementById('in-footer-note').value.trim();
+            const outFooter = document.getElementById('out-footer-note');
+            if (footerNote) {
+                outFooter.innerText = footerNote;
+                outFooter.style.display = '';
+            } else {
+                outFooter.innerText = '';
+                outFooter.style.display = 'none';
+            }
+
+            // Tanggal dinamis (nama bulan Indonesia)
+            const now = new Date();
+            const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            document.getElementById('out-date').innerText = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+
+            // Signatures — hanya tampil jika ada goresan
             ['penerima', 'hormat'].forEach(id => {
                 const canvas = canvases[`canvas-${id}`];
                 const img = document.getElementById(`out-sig-${id}`);
-                // Hanya tampilkan jika canvas tidak kosong (secara visual)
-                const dataUrl = canvas.toDataURL();
-                img.src = dataUrl;
-                img.classList.remove('hidden');
+                if (!canvas || isCanvasBlank(canvas)) {
+                    img.classList.add('hidden');
+                    img.src = '';
+                } else {
+                    img.src = canvas.toDataURL('image/png');
+                    img.classList.remove('hidden');
+                }
             });
 
-            // Table Sync
+            // Table
             const tbody = document.getElementById('table-body');
             tbody.innerHTML = '';
             let total = 0;
@@ -401,41 +443,66 @@
                 `;
             });
 
-            const pay = Number(document.getElementById('in-pay').value);
+            const pay = Number(document.getElementById('in-pay').value) || 0;
             document.getElementById('out-qty-total').innerText = `Total Qty: ${items.length} Item`;
             document.getElementById('out-total').innerText = new Intl.NumberFormat('id-ID').format(total);
             document.getElementById('out-pay').innerText = new Intl.NumberFormat('id-ID').format(pay);
             document.getElementById('out-sisa').innerText = new Intl.NumberFormat('id-ID').format(total - pay);
         }
 
+        /* ============================================================
+           MOBILE SCALING — FIX: margin negatif proporsional terhadap tinggi asli
+           ============================================================ */
         function handleMobileScaling() {
+            const paper = document.getElementById('print-area');
+            const container = document.querySelector('.paper-container');
+            if (!paper || !container) return;
+
             if (window.innerWidth < 1024) {
-                const paper = document.getElementById('print-area');
-                const scale = (document.querySelector('.paper-container').offsetWidth - 32) / 794;
+                const scale = (container.clientWidth - 32) / 794; // 794px ≈ 210mm
                 paper.style.transform = `scale(${scale})`;
-                paper.style.marginBottom = `-${794 * (1.6 - scale)}px`;
+                // offsetHeight tidak terpengaruh transform → compensation akurat
+                paper.style.marginBottom = `-${paper.offsetHeight * (1 - scale)}px`;
+            } else {
+                paper.style.transform = '';
+                paper.style.marginBottom = '';
             }
         }
 
+        window.addEventListener('resize', () => {
+            if (currentStep === 5) handleMobileScaling();
+        });
+
+        /* ============================================================
+           DOWNLOAD JPG — FIX: restore margin setelah capture
+           ============================================================ */
         async function downloadImage() {
             const printArea = document.getElementById('print-area');
             const originalTransform = printArea.style.transform;
+            const originalMargin = printArea.style.marginBottom;
+
             printArea.style.transform = 'scale(1)';
             printArea.style.marginBottom = '0px';
 
-            const canvas = await html2canvas(printArea, { scale: 2, useCORS: true });
-            const link = document.createElement('a');
-            link.download = `Nota-${document.getElementById('in-customer').value}.jpg`;
-            link.href = canvas.toDataURL('image/jpeg', 0.9);
-            link.click();
-
-            printArea.style.transform = originalTransform;
-            handleMobileScaling();
+            try {
+                const canvas = await html2canvas(printArea, { scale: 2, useCORS: true });
+                const link = document.createElement('a');
+                link.download = `Nota-${document.getElementById('in-customer').value || 'pelanggan'}.jpg`;
+                link.href = canvas.toDataURL('image/jpeg', 0.9);
+                link.click();
+            } finally {
+                printArea.style.transform = originalTransform;
+                printArea.style.marginBottom = originalMargin;
+                handleMobileScaling();
+            }
         }
 
+        /* ============================================================
+           ITEM MANAGEMENT
+           ============================================================ */
         function addItem() { items.push({ id: Date.now(), qty: "", name: "", price: 0, note: "" }); renderItemInputs(); }
-        function removeItem(i) { if(items.length > 1) { items.splice(i, 1); renderItemInputs(); } }
-        function updateItem(i, f, v) { items[i][f] = v; }
+        function removeItem(i) { if (items.length > 1) { items.splice(i, 1); renderItemInputs(); } }
+        function updateItem(i, f, v) { items[i][f] = f === 'price' ? Number(v) || 0 : v; }
 
         function renderItemInputs() {
             const container = document.getElementById('item-list-container');
